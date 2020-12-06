@@ -131,3 +131,10 @@ So, here you can see all requirements as tests format.
 
     }*/
 `
+As you can see, conjurer test is commented , for readability purposes i will not uncomment this test when refactor is finished.
+
+So let's begin refactor.
+
+# Refactor
+
+
