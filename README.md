@@ -6,7 +6,7 @@ The probability to touch unknow code and  break it is very high, is a good pract
 So, here you can see all requirements as tests format.
 
 [UNIT_TESTS_LINK](https://github.com/delalama/Gilded-rose-kata/blob/master/src/test/java/com/gildedrose/GlidedRoseAlbenizTest.java)
-[APPROVAL_TESTS_LINK](https://github.com/delalama/Gilded-rose-kata/blob/master/src/test/java/com/gildedrose/GoldenMasterOwnApprovalTest.gildedRoseApprovalTest.approved.txt)
+[APPROVAL_TESTS_LINK](https://github.com/delalama/Gilded-rose-kata/blob/master/src/test/java/com/gildedrose/GoldenMasterOwnApprovalTest.java)
 
 In this file there are 3 different solutions of this kata:
 [Solution](https://github.com/delalama/Gilded-rose-kata/blob/master/src/main/java/com/gildedrose/GildedRose.java)
