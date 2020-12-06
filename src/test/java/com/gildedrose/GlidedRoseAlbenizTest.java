@@ -136,11 +136,6 @@ public class GlidedRoseAlbenizTest {
     @Test
     public void quality_should_not_be_over_50_except_sulfuras_item() {
 
-        Item sulfuras = new ItemBuilder()
-                .setName(SULFURAS)
-                .setSellIn(5)
-                .setQuality(140)
-                .createItem();
         Item aged = new ItemBuilder()
                 .setName(AGED_BRIE)
                 .setSellIn(5)
@@ -149,18 +144,22 @@ public class GlidedRoseAlbenizTest {
         Item backstage = new ItemBuilder()
                 .setName(BACKSTAGE_PASSES)
                 .setSellIn(5)
-                .setQuality(55)
+                .setQuality(50)
                 .createItem();
         Item conjured = new ItemBuilder()
                 .setName(CONJURED)
                 .setSellIn(5)
-                .setQuality(60)
+                .setQuality(50)
+                .createItem();
+        Item sulfuras = new ItemBuilder()
+                .setName(SULFURAS)
+                .setSellIn(5)
+                .setQuality(140)
                 .createItem();
 
         new GildedRose(new Item[]{aged,backstage, conjured, sulfuras}).updateQuality();
 
-        boolean over_50 = true;
-        assertArrayEquals(new int[]{50,50,50,140}, new int[]{aged.quality, backstage.quality, conjured.quality, sulfuras.quality});
+        assertArrayEquals(new int[]{50,50,48,140}, new int[]{aged.quality, backstage.quality, conjured.quality, sulfuras.quality});
 
     }
 

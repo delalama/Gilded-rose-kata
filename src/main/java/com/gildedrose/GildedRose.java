@@ -10,7 +10,8 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        the_iñaki_you_owe_me_a_ramen_method();
+//        the_iñaki_you_owe_me_a_ramen_method();
+        the_I_do_not_like_to_repair_things_method();
     }
 
     public void the_I_do_not_like_to_repair_things_method() {
@@ -46,7 +47,7 @@ class GildedRose {
                     }
                 }
             }
-
+            //With the help of bunch of tests you can find the place to find this code.
             if (items[i].name.equals("Conjured Mana Cake")) {
                 items[i].quality = items[i].quality - 1;
                 if (items[i].quality < 0) {
