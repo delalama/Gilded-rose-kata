@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GlidedRoseAlbenizTest {
@@ -9,7 +10,7 @@ public class GlidedRoseAlbenizTest {
     private static final String AGED_BRIE = "Aged Brie";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String CONJURER = "Conjured Mana Cake";
+    private static final String CONJURED = "Conjured Mana Cake";
 
     @Test
     void sell_in_days_should_degrade_by_one() {
@@ -88,11 +89,11 @@ public class GlidedRoseAlbenizTest {
     }
 
     @Test
-    public void quality_increase_by_2_when_sellin_between_10_and_3_on_backstagePasses() {
+    public void quality_increase_by_2_when_sellin_between_10_and_6_on_backstagePasses() {
 
         Item anyItem = new ItemBuilder()
                 .setName(BACKSTAGE_PASSES)
-                .setSellIn(6)
+                .setSellIn(7)
                 .setQuality(7)
                 .createItem();
 
@@ -117,19 +118,94 @@ public class GlidedRoseAlbenizTest {
 
     }
 
-//    @Test
-//    public void quality_should_decrease_twice_when_conjurer_item() {
-//
-//        Item anyItem = new ItemBuilder()
-//                .setName(CONJURER)
-//                .setSellIn(5)
-//                .setQuality(7)
-//                .createItem();
-//
-//        new GildedRose(new Item[]{anyItem}).updateQuality();
-//
-//        assertEquals(5,anyItem.quality);
-//
-//    }
+    @Test
+    public void quality_should_decrease_twice_when_conjurer_item() {
+
+        Item anyItem = new ItemBuilder()
+                .setName(CONJURED)
+                .setSellIn(5)
+                .setQuality(7)
+                .createItem();
+
+        new GildedRose(new Item[]{anyItem}).updateQuality();
+
+        assertEquals(5,anyItem.quality);
+
+    }
+
+    @Test
+    public void quality_should_not_be_over_50_except_sulfuras_item() {
+
+        Item sulfuras = new ItemBuilder()
+                .setName(SULFURAS)
+                .setSellIn(5)
+                .setQuality(140)
+                .createItem();
+        Item aged = new ItemBuilder()
+                .setName(AGED_BRIE)
+                .setSellIn(5)
+                .setQuality(50)
+                .createItem();
+        Item backstage = new ItemBuilder()
+                .setName(BACKSTAGE_PASSES)
+                .setSellIn(5)
+                .setQuality(55)
+                .createItem();
+        Item conjured = new ItemBuilder()
+                .setName(CONJURED)
+                .setSellIn(5)
+                .setQuality(60)
+                .createItem();
+
+        new GildedRose(new Item[]{aged,backstage, conjured, sulfuras}).updateQuality();
+
+        boolean over_50 = true;
+        assertArrayEquals(new int[]{50,50,50,140}, new int[]{aged.quality, backstage.quality, conjured.quality, sulfuras.quality});
+
+    }
+
+    @Test
+    public void quality_should_not_be_negative_when_foo_item() {
+        Item anyItem = new ItemBuilder()
+                .setName("foo")
+                .setSellIn(5)
+                .setQuality(0)
+                .createItem();
+
+        new GildedRose(new Item[]{anyItem}).updateQuality();
+
+        assertEquals(0,anyItem.quality);
+    }
+
+    @Test
+    public void quality_should_not_be_negative_when_special_item() {
+        Item aged = new ItemBuilder()
+                .setName(AGED_BRIE)
+                .setSellIn(5)
+                .setQuality(0)
+                .createItem();
+        Item backstage = new ItemBuilder()
+                .setName(BACKSTAGE_PASSES)
+                .setSellIn(0)
+                .setQuality(0)
+                .createItem();
+        Item conjured = new ItemBuilder()
+                .setName(CONJURED)
+                .setSellIn(5)
+                .setQuality(0)
+                .createItem();
+        Item sulfuras = new ItemBuilder()
+                .setName(SULFURAS)
+                .setSellIn(5)
+                .setQuality(0)
+                .createItem();
+
+        new GildedRose(new Item[]{aged, backstage, conjured, sulfuras}).updateQuality();
+
+        assertEquals(1,aged.quality);
+        assertEquals(0,backstage.quality);
+        assertEquals(0,conjured.quality);
+        assertEquals(0,sulfuras.quality);
+    }
 
 }
